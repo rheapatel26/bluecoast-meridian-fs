@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/alata</item>
+        <item>@font/alegreya_sans_sc</item>
+        <item>@font/alegreya_sans_sc_thin</item>
+        <item>@font/bakbak_one</item>
+        <item>@font/cormorant_sc_light</item>
+    </array>
+</resources>
