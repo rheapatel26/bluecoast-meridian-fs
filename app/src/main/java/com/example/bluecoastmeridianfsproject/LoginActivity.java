@@ -1,6 +1,7 @@
 package com.example.bluecoastmeridianfsproject;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,9 +31,12 @@ public class LoginActivity extends AppCompatActivity {
             // Basic validation
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please enter both fields", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            if(username.equals("manager")  && password.equals("manager")){
                 // Handle login logic (e.g., check credentials)
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), home.class);
+                startActivity(i);
                 // Proceed to the next screen or activity
             }
         });
