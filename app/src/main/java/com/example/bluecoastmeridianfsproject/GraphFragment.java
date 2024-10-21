@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -55,62 +57,70 @@ public class GraphFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
-        
 
         // Safely access the TextView after the view is created
         TextView text = view.findViewById(R.id.textViewgraphfrag);
-         RequestQueue requestQueue;
-        String apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey="+APIkey;
-        requestQueue = Volley.newRequestQueue(requireContext());
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, apiUrl, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            // Extract the "Time Series (5min)" object
-                            JSONObject timeSeries = response.getJSONObject("Time Series (5min)");
-                            ArrayList<Entry> entries = new ArrayList<>();
-                            ArrayList<String> xLabels = new ArrayList<>();
+        Button btn = view.findViewById(R.id.searchsubmitbtn);
+        EditText searchbar = view.findViewById(R.id.stocksearchbar);
 
-                            // Iterate through the keys (timestamps)
-                            Iterator<String> keys = timeSeries.keys();
-                            int index = 0;
-                            while (keys.hasNext()) {
-                                String timeStamp = keys.next();
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String stock_search = searchbar.getText().toString();
+                RequestQueue requestQueue;
+                String apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+stock_search+"&interval=5min&apikey="+APIkey;
+                requestQueue = Volley.newRequestQueue(requireContext());
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, apiUrl, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    // Extract the "Time Series (5min)" object
+                                    JSONObject timeSeries = response.getJSONObject("Time Series (5min)");
+                                    ArrayList<Entry> entries = new ArrayList<>();
+                                    ArrayList<String> xLabels = new ArrayList<>();
 
-                                // Get the data for each time
-                                JSONObject timeData = timeSeries.getJSONObject(timeStamp);
-                                double stockPrice = timeData.getDouble("4. close");
+                                    // Iterate through the keys (timestamps)
+                                    Iterator<String> keys = timeSeries.keys();
+                                    int index = 0;
+                                    while (keys.hasNext()) {
+                                        String timeStamp = keys.next();
 
-                                // Add the data to the list (x = index, y = stockPrice)
-                                entries.add(new Entry(index, (float) stockPrice));
-                                xLabels.add(timeStamp);
-                                index++;
+                                        // Get the data for each time
+                                        JSONObject timeData = timeSeries.getJSONObject(timeStamp);
+                                        double stockPrice = timeData.getDouble("4. close");
+
+                                        // Add the data to the list (x = index, y = stockPrice)
+                                        entries.add(new Entry(index, (float) stockPrice));
+                                        xLabels.add(timeStamp);
+                                        index++;
+                                    }
+                                    plotGraph(entries, xLabels);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Log.e("ERROR", "Error parsing JSON: " + e.getMessage());
+                                }
                             }
-                            plotGraph(entries, xLabels);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.e("ERROR", "Error parsing JSON: " + e.getMessage());
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if(error.networkResponse!=null&& error.networkResponse.data!=null)
-                        {
-                            String responeBody = new String(error.networkResponse.data);
-                            Log.e("API_ERROR", "Error Response: " + responeBody);
-                        }
-                        Log.e("API_ERROR", "Error fetching stock price: " + error.getMessage());
-                    }
-                });
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                if(error.networkResponse!=null&& error.networkResponse.data!=null)
+                                {
+                                    String responeBody = new String(error.networkResponse.data);
+                                    Log.e("API_ERROR", "Error Response: " + responeBody);
+                                }
+                                Log.e("API_ERROR", "Error fetching stock price: " + error.getMessage());
+                            }
+                        });
 
-        
+                requestQueue.add(request);
+            }
+        });
 
 
-        requestQueue.add(request);
+
+
 
     }
 
