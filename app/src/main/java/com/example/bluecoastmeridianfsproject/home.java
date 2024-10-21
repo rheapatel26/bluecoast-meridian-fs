@@ -3,6 +3,7 @@ package com.example.bluecoastmeridianfsproject;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,12 +23,15 @@ public class home extends AppCompatActivity implements BottomNavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
         bottomNavigationView
                 = findViewById(R.id.bottomnavbar);
 
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.markets);
+
     }
     GraphFragment graphfrag = new GraphFragment();
     GraphFragment youfrag = new GraphFragment();
