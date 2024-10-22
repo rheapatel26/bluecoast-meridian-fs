@@ -7,14 +7,11 @@
     tools:context=".MainActivity">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textViewgraphfrag"
-        android:layout_width="162dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="196dp"
-        android:layout_marginEnd="114dp"
-        android:text="client pressed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#65E4A6"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

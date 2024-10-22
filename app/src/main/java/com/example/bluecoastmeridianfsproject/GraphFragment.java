@@ -60,7 +60,7 @@ public class GraphFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Safely access the TextView after the view is created
-        TextView text = view.findViewById(R.id.textViewgraphfrag);
+        //TextView text = view.findViewById(R.id.textViewgraphfrag);
         Button btn = view.findViewById(R.id.searchsubmitbtn);
         EditText searchbar = view.findViewById(R.id.stocksearchbar);
 

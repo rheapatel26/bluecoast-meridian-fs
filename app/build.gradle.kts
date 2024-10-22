@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -50,5 +51,10 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.5.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.firebaseui:firebase-ui-database:7.2.0")
+    implementation ("com.google.firebase:firebase-database:20.2.2")
+    implementation ("com.google.android.material:material:1.1.0")
 
 }
