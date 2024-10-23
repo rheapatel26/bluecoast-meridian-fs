@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Markets"
+        android:id="@+id/markets"
+
+        android:icon="@drawable/candlestick_icon"/>
+    <item android:title="Clients"
+        android:id="@+id/clients"
+        android:icon="@drawable/baseline_people_alt_24"/>
+    <item android:title="Portfolio"
+        android:id="@+id/portfolio"
+        android:icon="@drawable/pipe_duotone"/>
+    <item android:title="You"
+        android:id="@+id/you"
+        android:icon="@drawable/user_fill"/>
+</menu>
