@@ -1,29 +1,27 @@
 package com.example.bluecoastmeridianfsproject;
 
+import java.util.List;
+
 public class Client {
     private String firstname;
-    private String holdings;
-    private String stocknames;
+    private List<Long> holdings;
+    private List<String> stocknames;
+    private List<Long> bought;
 
     public Client() {
         // Default constructor required for calls to DataSnapshot.getValue(Client.class)
     }
 
-    public Client(String firstname, String holdings, String stocknames) {
+    public Client(String firstname, List<Long> holdings, List<String> stocknames, List<Long> bought) {
         this.firstname = firstname;
         this.holdings = holdings;
         this.stocknames = stocknames;
+        this.bought = bought;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getHoldings() {
-        return holdings;
-    }
-
-    public String getStocknames() {
-        return stocknames;
-    }
+    // Getters
+    public String getFirstname() { return firstname; }
+    public List<Long> getHoldings() { return holdings; }
+    public List<String> getStocknames() { return stocknames; }
+    public List<Long> getBought() { return bought; }
 }
