@@ -119,10 +119,6 @@ public class GraphFragment extends Fragment {
             }
         });
 
-
-
-
-
     }
 
     private void plotGraph(ArrayList<Entry> entries, ArrayList<String> xLabels) {

@@ -70,6 +70,12 @@ public class ClientFragment extends Fragment {
                 // Create a bundle to pass data to the second fragment
                 Bundle bundle = new Bundle();
                 bundle.putString("clientName", selectedClient.getFirstname());
+                bundle.putIntegerArrayList("boughtList", new ArrayList<>(selectedClient.getBought()));
+                bundle.putIntegerArrayList("currentList", new ArrayList<>(selectedClient.getCurrent()));
+                bundle.putIntegerArrayList("holdingList", new ArrayList<>(selectedClient.getHoldings()));
+                bundle.putStringArrayList("stocknameList", new ArrayList<>(selectedClient.getStocknames()));
+                //bundle.putArr("bought", selectedClient.getBought());
+
 
                 // Create an instance of the second fragment and pass the bundle
                 PortfolioFragment portfoliofrag = new PortfolioFragment();
