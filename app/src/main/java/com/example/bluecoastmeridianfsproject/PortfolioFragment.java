@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +72,9 @@ public class PortfolioFragment extends Fragment {
                 // Handle the case when stocknameList or currentList is null
                 Toast.makeText(getContext(), "Stock names or current data is missing", Toast.LENGTH_SHORT).show();
             }
+            if (stocknameList != null && holdingList != null && profitList != null && boughtList != null && currentList != null) {
+                populateTable(view, stocknameList, holdingList, profitList, boughtList, currentList);
+            }
 
             //setupPieChart(stocknameList, currentList);
             //setupBarChart(stocknameList, currentList);
@@ -113,5 +118,45 @@ public class PortfolioFragment extends Fragment {
 
         barChart.setData(barData);
         barChart.invalidate(); // Refresh the chart
+    }
+
+    private void populateTable(View rootView, ArrayList<String> stocknameList, ArrayList<Integer> holdingList, ArrayList<Integer> profitList, ArrayList<Integer> boughtList, ArrayList<Integer> currentList) {
+        TableLayout tableLayout = rootView.findViewById(R.id.portfolioTable);
+
+        // Loop through the data and add rows to the table
+        for (int i = 0; i < stocknameList.size(); i++) {
+            TableRow row = new TableRow(getContext());
+
+            // Create TextViews for each column
+            TextView stockName = new TextView(getContext());
+            stockName.setText(stocknameList.get(i));
+            stockName.setPadding(8, 8, 8, 8);
+
+            TextView holding = new TextView(getContext());
+            holding.setText(String.valueOf(holdingList.get(i)));
+            holding.setPadding(8, 8, 8, 8);
+
+            TextView profit = new TextView(getContext());
+            profit.setText(String.valueOf(profitList.get(i)));
+            profit.setPadding(8, 8, 8, 8);
+
+            TextView bought = new TextView(getContext());
+            bought.setText(String.valueOf(boughtList.get(i)));
+            bought.setPadding(8, 8, 8, 8);
+
+            TextView current = new TextView(getContext());
+            current.setText(String.valueOf(currentList.get(i)));
+            current.setPadding(8, 8, 8, 8);
+
+            // Add the TextViews to the TableRow
+            row.addView(stockName);
+            row.addView(holding);
+            row.addView(profit);
+            row.addView(bought);
+            row.addView(current);
+
+            // Add the TableRow to the TableLayout
+            tableLayout.addView(row);
+        }
     }
 }
