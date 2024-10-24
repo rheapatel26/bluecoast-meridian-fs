@@ -76,10 +76,7 @@ public class ClientFragment extends Fragment {
                 portfoliofrag.setArguments(bundle);
 
                 // Perform the fragment transaction to replace the current fragment with SecondFragment
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame, portfoliofrag);
-                transaction.addToBackStack(null); // Add to back stack so that the user can navigate back
-                transaction.commit();
+                ((home) getActivity()).navigateToFragment(portfoliofrag, bundle);
             }
         });
 

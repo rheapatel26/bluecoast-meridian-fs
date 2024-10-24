@@ -29,27 +29,29 @@ public class ClientAdapter extends ArrayAdapter<Client> {
         // Get the data item for this position
         Client client = getItem(position);
         TextView clientFirstNameTextView = convertView.findViewById(R.id.clientFirstNameTextView);
-        TextView clientStocksTextView = convertView.findViewById(R.id.clientStocksTextView);
+        TextView clientTotalsTextView = convertView.findViewById(R.id.clientTotalsTextView); // Assuming a new TextView for totals
 
         // Set the first name
         if (client != null) {
             clientFirstNameTextView.setText(client.getFirstname());
 
-            // Format stock information
-            StringBuilder stocksInfo = new StringBuilder();
-            for (int i = 0; i < client.getStocknames().size(); i++) {
-                String stockName = client.getStocknames().get(i);
-                int boughtQuantity = Math.toIntExact(client.getBought().get(i));
-                int currentQuantity = Math.toIntExact(client.getHoldings().get(i)); // Assuming holdings is a List<Integer>
+            // Initialize totals
+            int totalInvested = 0;
+            int totalCurrent = 0;
 
-                stocksInfo.append(stockName)
-                        .append(": Bought - ").append(boughtQuantity)
-                        .append(", Current - ").append(currentQuantity)
-                        .append("\n"); // New line for each stock
+            // Calculate totals for all stocks
+            for (int i = 0; i < client.getStocknames().size(); i++) {
+                int boughtQuantity = Math.toIntExact(client.getBought().get(i));
+                int currentPrice = Math.toIntExact(client.getCurrent().get(i));
+                int holdings = Math.toIntExact(client.getHoldings().get(i));
+
+                // Accumulate total invested and current total
+                totalInvested += boughtQuantity * holdings;
+                totalCurrent += currentPrice * holdings;
             }
 
-            // Set the stocks information
-            clientStocksTextView.setText(stocksInfo.toString().trim()); // Remove trailing newline
+            // Set the totals information
+            clientTotalsTextView.setText("Total Invested: " + totalInvested + ", Current Total: " + totalCurrent);
         }
 
         return convertView;

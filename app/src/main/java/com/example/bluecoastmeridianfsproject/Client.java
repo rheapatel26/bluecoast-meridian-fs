@@ -4,24 +4,30 @@ import java.util.List;
 
 public class Client {
     private String firstname;
-    private List<Long> holdings;
+    private List<Integer> bought;
+    private List<Integer> current; // Add this list to hold current prices
+    private List<Integer> holdings;
     private List<String> stocknames;
-    private List<Long> bought;
 
-    public Client() {
-        // Default constructor required for calls to DataSnapshot.getValue(Client.class)
+    // Constructor, getters, and setters
+
+    public String getFirstname() {
+        return firstname;
     }
 
-    public Client(String firstname, List<Long> holdings, List<String> stocknames, List<Long> bought) {
-        this.firstname = firstname;
-        this.holdings = holdings;
-        this.stocknames = stocknames;
-        this.bought = bought;
+    public List<Integer> getBought() {
+        return bought;
     }
 
-    // Getters
-    public String getFirstname() { return firstname; }
-    public List<Long> getHoldings() { return holdings; }
-    public List<String> getStocknames() { return stocknames; }
-    public List<Long> getBought() { return bought; }
+    public List<Integer> getCurrent() {
+        return current; // Ensure this method exists
+    }
+
+    public List<Integer> getHoldings() {
+        return holdings;
+    }
+
+    public List<String> getStocknames() {
+        return stocknames;
+    }
 }
