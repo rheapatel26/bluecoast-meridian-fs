@@ -35,8 +35,9 @@ public class home extends AppCompatActivity implements BottomNavigationView.OnNa
     }
     GraphFragment graphfrag = new GraphFragment();
     GraphFragment youfrag = new GraphFragment();
-    GraphFragment portfoliofrag = new GraphFragment();
+    PortfolioFragment portfoliofrag = new PortfolioFragment();
     ClientFragment clientfrag = new ClientFragment();
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
@@ -69,6 +70,7 @@ public class home extends AppCompatActivity implements BottomNavigationView.OnNa
                         .commit();
                 return true;
         }
+
         return false;
     }
 }

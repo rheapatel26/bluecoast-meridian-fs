@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,37 +61,29 @@ public class ClientFragment extends Fragment {
             }
         });
 
+        clientListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the clicked item
+                Client selectedClient = clientList.get(position);
+
+                // Create a bundle to pass data to the second fragment
+                Bundle bundle = new Bundle();
+                bundle.putString("clientName", selectedClient.getFirstname());
+
+                // Create an instance of the second fragment and pass the bundle
+                PortfolioFragment portfoliofrag = new PortfolioFragment();
+                portfoliofrag.setArguments(bundle);
+
+                // Perform the fragment transaction to replace the current fragment with SecondFragment
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame, portfoliofrag);
+                transaction.addToBackStack(null); // Add to back stack so that the user can navigate back
+                transaction.commit();
+            }
+        });
+
         return view;
     }
 
-    // Custom adapter class
-    private class ClientAdapter extends ArrayAdapter<Client> {
-        public ClientAdapter(@NonNull android.content.Context context, List<Client> clients) {
-            super(context, 0, clients);
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            // Check if an existing view is being reused, otherwise inflate the view
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_client, parent, false);
-            }
-
-            // Get the data item for this position
-            Client client = getItem(position);
-            TextView clientInfoTextView = convertView.findViewById(R.id.clientInfoTextView);
-
-            // Format the client info string
-            if (client != null) {
-                String info = client.getFirstname() + ": Holdings - " +
-                        client.getHoldings() + ", Stocks - " +
-                        client.getStocknames() + ", Bought - " +
-                        client.getBought();
-                clientInfoTextView.setText(info);
-            }
-
-            return convertView;
-        }
-    }
 }
