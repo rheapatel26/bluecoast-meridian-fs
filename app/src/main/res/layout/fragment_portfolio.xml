@@ -14,41 +14,53 @@
             android:id="@+id/clientText"
             android:layout_width="271dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
             android:layout_marginBottom="16dp"
-            android:text="TextView" />
+            android:fontFamily="@font/alata"
+            android:text="TextView"
+            android:textColor="@color/yellowo"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TableLayout
             android:id="@+id/portfolioTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="1"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="16dp">
 
             <!-- Table Header Row -->
             <TableRow>
+
                 <TextView
+                    android:fontFamily="@font/alata"
+                    android:padding="8dp"
                     android:text="Stock Name"
-                    android:padding="8dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:fontFamily="@font/alata"
+                    android:padding="8dp"
                     android:text="Holding"
-                    android:padding="8dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:fontFamily="@font/alata"
+                    android:padding="8dp"
                     android:text="Profit"
-                    android:padding="8dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:fontFamily="@font/alata"
+                    android:padding="8dp"
                     android:text="Bought"
-                    android:padding="8dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:text="Current"
+                    android:fontFamily="@font/alata"
                     android:padding="8dp"
+                    android:text="Current"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -60,12 +72,14 @@
         <!-- BarChart -->
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginBottom="16dp" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pieChart"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginBottom="16dp" />
